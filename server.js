@@ -1,18 +1,18 @@
 const jsonServer = require('json-server')
+const resources = require('./models')
+
 const server = jsonServer.create()
-const router = jsonServer.router('./db/nosdeputes.fr_deputes_en_mandat_2022-06-27.json')
+const router = jsonServer.router(resources)
 const middlewares = jsonServer.defaults()
-const { renameDeputyKeys } = require('./dto-rename-keys.js')
+
+server.use((req, res, next) => {
+  req.query._limit = 25
+  next()
+})
 
 server.use(middlewares)
-server.use(jsonServer.bodyParser)
-
-router.render = (req, res) => {
-    const isDeputyRelated =  req.originalMethod === 'GET' && /^\/deputies/.test(req.originalUrl)
-    if (isDeputyRelated) {
-        res.jsonp(renameDeputyKeys(res.locals.data))
-    }
-}
-
 server.use(router)
-server.listen(3000, () => console.log('JSON Server is running'))
+
+const { SERVER_PORT = 8000 } = process.env
+
+server.listen(SERVER_PORT, () => console.log('Server is running on port', SERVER_PORT))

@@ -10,8 +10,8 @@ const deputy = {
     nom_circo: 'districtName',
     num_circo: 'districtNumber',
     mandat_debut: 'termStartedAt',
-    groupe_sigle: 'partyAcronym',
-    parti_ratt_financier: 'party',
+    groupe_sigle: 'organizationAcronym',
+    parti_ratt_financier: 'organizationName',
     sites_web: 'websites',
     site: 'url',
     emails: 'emailAddresses',
@@ -34,5 +34,17 @@ const deputy = {
     twitter: 'twitter',
 }
 
-module.exports = { deputy }
+const organization = {
+    slug: 'slug',
+    nom: 'name',
+    acronyme: 'acronym',
+    groupe_actuel: 'active',
+    couleur: 'color',
+    order: 'order',
+    type: 'type',
+    url_nosdeputes: 'nosDeputesUrl',
+    url_nosdeputes_api: 'nosDeputesApiUrl'
+}
+
+module.exports = { deputy, organization }
 
